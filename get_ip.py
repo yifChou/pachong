@@ -1,11 +1,5 @@
 import requests
-import json
-import time
 import re
-import random
-import models
-from models import session
-import mytime
 comment_url ="http://music.163.com/api/v1/resource/comments/R_SO_4_520458203"
 Mname_url = "https://music.163.com/song?id="
 proxy_list =[]
@@ -49,9 +43,9 @@ class pachong():
                 ip = ip[0] + ":" + ip[1]
                 with open("httpip.txt","a+") as f:
                     f.writelines(ip + "\n")
-'''pc = pachong()
+pc = pachong()
 pc.get_httpip(5)
-pc.get_httpsid(5)'''
+pc.get_httpsid(5)
 l = []
 with open("httpip.txt","r") as f:
     for line in f:
