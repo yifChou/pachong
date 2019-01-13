@@ -40,7 +40,7 @@ class pachong():
         with open("httpip.txt", "r") as f:
             for line in f:
                 self.http_ip_list.append(line.strip())
-        print(self.https_ip_list,self.http_ip_list)
+        #print(self.https_ip_list,self.http_ip_list)
         self.header = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36",
             "Referer": "http://music.163.com/",
@@ -201,7 +201,7 @@ if __name__ == "__main__":
     lock = threading.Lock()
     def get_music(start, end):
         singerid = session.query(moduelsinger.Singer.singerid, moduelsinger.Singer.singer).filter(
-            moduelsinger.Singer.type == 1001).all()
+            moduelsinger.Singer.type == 2001).all()
         # singerid = [('1876', '阿杜')]
         for sid in range(start, end):
             pc = pachong(singerid[sid][0])
@@ -247,12 +247,15 @@ if __name__ == "__main__":
     pc.get_singer_music()'''
     threads = []
     start_time = time.time()
-    for i in range(670, 770, 10):
+    m = 0
+    n = 200
+    for i in range(m, n, 10):
         step = 10
         print(i, i + step)
         threads.append(threading.Thread(target=get_music, args=(i, i + step)))
     for t in threads:
         t.start()
+
     print('主线程结束了！', threading.current_thread().name)
     print('一共用时：', time.time() - start_time)
     # get_music(400)

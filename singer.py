@@ -162,9 +162,9 @@ class pachong():
                                  album=album,
                                  pubdate=mus["pubDate"], comments=comments, creattime=mytime.get_now(),
                                  updatetime=mytime.get_now()))
-                lock.acquire()
+
                 session.commit()
-                lock.release()
+
                 print(mus["title"] + "入库成功:id=", id)
                 time.sleep(t)
                 return 1
@@ -181,17 +181,17 @@ if __name__ == "__main__":
 
         isdata = pc.music2db(i,t = 1)
     #html = requests.get(url = "https://music.163.com/song?id=536099160",proxies = {"https":"123.127.93.188:44399"})
-    
+    '''
     type_list =[1001,1002,1003,2001,2002,2003,6001,6002,6003,7001,7002,7003,4001,4002,4003]
     for tl in type_list:
-        
+        pc = pachong(tl)
         try:
-            for i in range(65, 90):
-                pc.singer2db(i, sleep=2)
-            pc.singer2db(0)
+            pc.singer2db(90, sleep=0)
         except Exception as e:
-            print(e)'''
+            print(e)
+            '''
     lock = threading.Lock()
+
     def get_music(start,end):
         singerid = session.query(moduelsinger.Singer.singerid,moduelsinger.Singer.singer).filter(moduelsinger.Singer.type == 1001).all()
         #singerid = [('1876', '阿杜')]
@@ -210,8 +210,8 @@ if __name__ == "__main__":
             else:
                 print("页面无数据")
 
-    '''pc = pachong(1876)
-    pc.get_singer_music()'''
+    pc = pachong(1876)
+    pc.get_singer_music()
     threads = []
     start_time = time.time()
     for i in range(0,8,2):
@@ -224,7 +224,7 @@ if __name__ == "__main__":
         t.join()
     print('主线程结束了！', threading.current_thread().name)
     print('一共用时：', time.time() - start_time)
-    #get_music(400)
+    #get_music(400)'''
 
 
 
